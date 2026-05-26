@@ -21,14 +21,15 @@
         <span class="toast-icon">✓</span>
         <span>You have been logged out.</span>
       </div>
-    </div>
 
-    <script>
-      setTimeout(() => {
-        document.querySelectorAll(".toast").forEach((toast) => {
-          toast.classList.add("toast-hide");
-        });
-      }, 3200);
-    </script>
+      <script>
+        setTimeout(() => {
+          document.querySelectorAll(".toast").forEach((toast) => {
+            toast.classList.add("toast-hide");
+            toast.addEventListener("animationend", () => toast.remove());
+          });
+        }, 3200);
+      </script>
+    </div>
   </body>
 </html>

@@ -566,6 +566,47 @@ form[style*="display: inline"] button {
 }
 
 /* ===========================================================
+   Breadcrumb Navigation
+   =========================================================== */
+
+.breadcrumb-nav {
+  max-width: 1200px;
+  margin: -0.6rem auto 1.6rem;
+  padding: 0.75rem 0.95rem;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+
+  color: var(--ink-muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+
+  box-shadow: var(--shadow-sm);
+}
+
+.breadcrumb-nav a {
+  color: var(--accent-deep);
+  border-bottom: 0;
+  text-decoration: none;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: var(--ink-faint);
+  font-weight: 800;
+}
+
+/* ===========================================================
    Page Header
    =========================================================== */
 
@@ -1881,46 +1922,5 @@ td a:hover {
     .script-copy-box textarea {
       min-height: 320px;
     }
-  }
-
-  /* ===========================================================
-   Breadcrumb Navigation
-   =========================================================== */
-
-  .breadcrumb-nav {
-    max-width: 1200px;
-    margin: -0.6rem auto 1.6rem;
-    padding: 0.75rem 0.95rem;
-
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-
-    color: var(--ink-muted);
-    font-size: 0.84rem;
-    font-weight: 800;
-
-    box-shadow: var(--shadow-sm);
-  }
-
-  .breadcrumb-nav a {
-    color: var(--accent-deep);
-    border-bottom: 0;
-    text-decoration: none;
-  }
-
-  .breadcrumb-nav a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-  }
-
-  .breadcrumb-separator {
-    color: var(--ink-faint);
-    font-weight: 800;
   }
 }
