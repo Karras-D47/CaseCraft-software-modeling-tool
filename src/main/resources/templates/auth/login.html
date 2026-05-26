@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body class="auth-page">
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+
+    <div class="auth-shell">
+      <!-- Left side / branding -->
+      <section class="auth-hero">
+        <div class="auth-logo">
+          <img th:src="@{/images/casecraft-icon.svg}" alt="CaseCraft icon" />
+        </div>
+
+        <h1>Welcome to CaseCraft</h1>
+
+        <p>
+          Organize your software engineering projects, use cases, actors, CRC
+          cards and generated diagrams in one clean workspace.
+        </p>
+
+        <div class="auth-feature-list">
+          <span>Use Case Diagrams</span>
+          <span>Class Diagrams</span>
+          <span>CRC Cards</span>
+        </div>
+      </section>
+
+      <!-- Right side / login form -->
+      <section class="auth-card">
+        <h2>Sign in</h2>
+        <p class="muted">Access your CaseCraft workspace.</p>
+
+        <form th:action="@{/login}" method="post">
+          <label
+            >Username
+            <input
+              type="text"
+              name="username"
+              placeholder="your username"
+              required
+            />
+          </label>
+
+          <label
+            >Password
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              required
+            />
+          </label>
+
+          <button type="submit" class="auth-main-button">Login</button>
+        </form>
+
+        <div class="auth-links">
+          <a th:href="@{/register}">Don't have an account? Register</a>
+          <a th:href="@{/profile}">Update my profile</a>
+        </div>
+      </section>
+    </div>
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

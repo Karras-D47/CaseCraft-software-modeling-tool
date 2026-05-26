@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+    <div
+      th:replace="~{fragments/breadcrumbs :: crcEdit(${project}, ${card})}"
+    ></div>
+
+    <h2>Edit CRC Card</h2>
+
+    <div class="card">
+      <form
+        th:action="@{/projects/{pid}/crccards/{cid}/edit(pid=${project.id},cid=${card.id})}"
+        method="post"
+      >
+        <label
+          >Class Name
+          <input
+            type="text"
+            name="className"
+            th:value="${card.className}"
+            required
+          />
+        </label>
+        <label
+          >Responsibilities
+          <textarea
+            name="responsibilities"
+            th:text="${card.responsibilities}"
+          ></textarea>
+        </label>
+        <label
+          >Collaborations <span class="muted">(comma-separated)</span>
+          <textarea
+            name="collaborations"
+            th:text="${card.collaborations}"
+          ></textarea>
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Link to a Use Case</h3>
+      <form
+        th:action="@{/projects/{pid}/crccards/{cid}/link(pid=${project.id},cid=${card.id})}"
+        method="post"
+      >
+        <select name="useCaseId">
+          <option
+            th:each="uc : ${useCases}"
+            th:value="${uc.id}"
+            th:text="${uc.name}"
+          ></option>
+        </select>
+        <button type="submit">Link</button>
+      </form>
+
+      <h4>Currently Linked Use Cases</h4>
+      <ul>
+        <li th:each="uc : ${card.linkedUseCases}" th:text="${uc.name}"></li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <!-- Projects page -->
+    <nav th:fragment="projectsHome" class="breadcrumb-nav" aria-label="Breadcrumb">
+      <span>Projects</span>
+    </nav>
+
+    <!-- Project detail page -->
+    <nav th:fragment="projectDetail(project)" class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a th:href="@{/projects}">Projects</a>
+      <span class="breadcrumb-separator">/</span>
+      <span th:text="${project.name}">Project Name</span>
+    </nav>
+
+    <!-- Edit project page -->
+    <nav th:fragment="projectEdit(project)" class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a th:href="@{/projects}">Projects</a>
+      <span class="breadcrumb-separator">/</span>
+      <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.name}">
+        Project Name
+      </a>
+      <span class="breadcrumb-separator">/</span>
+      <span>Edit Project</span>
+    </nav>
+
+    <!-- Edit use case page -->
+    <nav th:fragment="useCaseEdit(project, useCase)" class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a th:href="@{/projects}">Projects</a>
+      <span class="breadcrumb-separator">/</span>
+      <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.name}">
+        Project Name
+      </a>
+      <span class="breadcrumb-separator">/</span>
+      <span th:text="${useCase.name}">Use Case</span>
+      <span class="breadcrumb-separator">/</span>
+      <span>Edit</span>
+    </nav>
+
+    <!-- Edit CRC card page -->
+    <nav th:fragment="crcEdit(project, card)" class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a th:href="@{/projects}">Projects</a>
+      <span class="breadcrumb-separator">/</span>
+      <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.name}">
+        Project Name
+      </a>
+      <span class="breadcrumb-separator">/</span>
+      <span th:text="${card.className}">CRC Card</span>
+      <span class="breadcrumb-separator">/</span>
+      <span>Edit</span>
+    </nav>
+  </body>
+</html>

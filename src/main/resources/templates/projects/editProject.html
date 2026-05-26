@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+
+  <body class="wide">
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+    <div th:replace="~{fragments/breadcrumbs :: projectEdit(${project})}"></div>
+
+    <header class="page-header">
+      <span class="page-eyebrow">Edit project</span>
+      <h1>Edit Project</h1>
+      <p>Update the project name and description.</p>
+    </header>
+
+    <div class="card">
+      <form th:action="@{/projects/{id}/edit(id=${project.id})}" method="post">
+        <label>
+          Project name
+          <input
+            type="text"
+            name="name"
+            th:value="${project.name}"
+            placeholder="Project name"
+            required
+          />
+        </label>
+
+        <label>
+          Description
+          <textarea
+            name="description"
+            th:text="${project.description}"
+            placeholder="Project description"
+          ></textarea>
+        </label>
+
+        <button type="submit">Save Changes</button>
+        <a class="btn-secondary" th:href="@{/projects/{id}(id=${project.id})}">
+          Cancel
+        </a>
+      </form>
+    </div>
+
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

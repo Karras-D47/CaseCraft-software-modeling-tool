@@ -1,0 +1,130 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body class="wide">
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+    <div th:replace="~{fragments/breadcrumbs :: projectsHome}"></div>
+
+    <header class="page-header">
+      <span class="page-eyebrow">Project workspace</span>
+      <h2>My Projects</h2>
+    </header>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span class="stat-label">Projects</span>
+        <strong th:text="${totalProjects}">0</strong>
+        <small>Total workspaces</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Use Cases</span>
+        <strong th:text="${totalUseCases}">0</strong>
+        <small>Defined requirements</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">CRC Cards</span>
+        <strong th:text="${totalCRCCards}">0</strong>
+        <small>Class responsibility cards</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Actors</span>
+        <strong th:text="${totalActors}">0</strong>
+        <small>System participants</small>
+      </article>
+    </section>
+
+    <div class="card" id="create-project">
+      <h4>Create a new project</h4>
+      <form th:action="@{/projects/create}" method="post">
+        <input type="text" name="name" placeholder="Project name" required />
+        <input type="text" name="description" placeholder="Description" />
+        <button type="submit">Create Project</button>
+      </form>
+    </div>
+
+    <section
+      class="project-cards-grid"
+      th:if="${projects != null and not #lists.isEmpty(projects)}"
+    >
+      <article class="project-card" th:each="project : ${projects}">
+        <div class="project-card-top"></div>
+
+        <h3 th:text="${project.name}">Project name</h3>
+
+        <p
+          th:text="${project.description != null and !#strings.isEmpty(project.description)
+        ? project.description
+        : 'No description provided yet.'}"
+        >
+          Project description
+        </p>
+
+        <div class="project-card-actions">
+          <a
+            class="project-open-link"
+            th:href="@{/projects/{id}(id=${project.id})}"
+          >
+            Open Project
+          </a>
+          <a
+            class="project-edit-link"
+            th:href="@{/projects/{id}/edit(id=${project.id})}"
+          >
+            Edit
+          </a>
+
+          <form
+            th:action="@{/projects/{id}/delete(id=${project.id})}"
+            method="post"
+            class="project-delete-form"
+          >
+            <button type="submit" class="project-delete-button">Delete</button>
+          </form>
+        </div>
+      </article>
+    </section>
+
+    <section
+      class="empty-state"
+      th:if="${projects == null or #lists.isEmpty(projects)}"
+    >
+      <div class="empty-state-icon">＋</div>
+
+      <h3>No projects yet</h3>
+
+      <p>
+        Start by creating your first CaseCraft project using the form above.
+        Your projects will appear here once added.
+      </p>
+    </section>
+
+    <section
+      class="empty-state"
+      th:if="${projects == null or #lists.isEmpty(projects)}"
+    >
+      <div class="empty-state-icon">＋</div>
+
+      <h3>No projects yet</h3>
+
+      <p>
+        Start by creating your first CaseCraft project using the form above.
+        Your projects will appear here once added.
+      </p>
+    </section>
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

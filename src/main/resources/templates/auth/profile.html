@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+
+    <div class="card">
+      <h2>My Profile</h2>
+
+      <form th:action="@{/profile}" method="post">
+        <label
+          >Email
+          <input type="email" name="email" th:value="${user.email}" />
+        </label>
+        <label
+          >New Password <span class="muted">(leave blank to keep current)</span>
+          <input type="password" name="password" placeholder="••••••••" />
+        </label>
+        <button type="submit">Update Profile</button>
+      </form>
+
+      <div class="toolbar">
+        <a th:href="@{/projects}">Back to Projects</a>
+      </div>
+    </div>
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

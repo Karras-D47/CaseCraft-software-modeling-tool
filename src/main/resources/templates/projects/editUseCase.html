@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+    <div
+      th:replace="~{fragments/breadcrumbs :: useCaseEdit(${project}, ${useCase})}"
+    ></div>
+    <h2>Edit Use Case</h2>
+
+    <div class="card">
+      <form
+        th:action="@{/projects/{pid}/usecases/{uid}/edit(pid=${project.id},uid=${useCase.id})}"
+        method="post"
+      >
+        <label
+          >Name
+          <input type="text" name="name" th:value="${useCase.name}" required />
+        </label>
+        <label
+          >Preconditions
+          <textarea
+            name="preconditions"
+            th:text="${useCase.preconditions}"
+          ></textarea>
+        </label>
+        <label
+          >Main Flow
+          <textarea name="mainFlow" th:text="${useCase.mainFlow}"></textarea>
+        </label>
+        <label
+          >Alternative Flow
+          <textarea
+            name="alternativeFlow"
+            th:text="${useCase.alternativeFlow}"
+          ></textarea>
+        </label>
+        <label
+          >Postconditions
+          <textarea
+            name="postconditions"
+            th:text="${useCase.postconditions}"
+          ></textarea>
+        </label>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+
+    <div class="toolbar">
+      <a th:href="@{/projects/{id}(id=${project.id})}">Cancel</a>
+    </div>
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

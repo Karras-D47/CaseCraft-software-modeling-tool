@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <!-- Public navbar for login/register pages -->
+    <nav th:fragment="publicNavbar" class="app-navbar">
+      <a th:href="@{/login}" class="navbar-brand">
+        <span class="navbar-logo">
+          <img th:src="@{/images/casecraft-icon.svg}" alt="CaseCraft icon" />
+        </span>
+        <span>
+          <strong>CaseCraft</strong>
+          <small>Software Modeling Tool</small>
+        </span>
+      </a>
+
+      <div class="navbar-links">
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/register}">Register</a>
+      </div>
+    </nav>
+
+    <!-- Authenticated navbar for app pages -->
+    <nav th:fragment="appNavbar" class="app-navbar">
+      <a th:href="@{/projects}" class="navbar-brand">
+        <span class="navbar-logo">
+          <img th:src="@{/images/casecraft-icon.svg}" alt="CaseCraft icon" />
+        </span>
+        <span>
+          <strong>CaseCraft</strong>
+          <small>Software Modeling Tool</small>
+        </span>
+      </a>
+
+      <div class="navbar-links">
+        <a th:href="@{/projects}">My Projects</a>
+
+        <a
+          th:href="@{/profile}"
+          class="navbar-user"
+          th:text="${currentUsername}"
+        >
+          Username
+        </a>
+
+        <form th:action="@{/logout}" method="post" class="navbar-logout-form">
+          <button type="submit" class="navbar-logout-button">Logout</button>
+        </form>
+      </div>
+    </nav>
+  </body>
+</html>

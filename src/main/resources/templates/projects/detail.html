@@ -1,0 +1,318 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body class="wide">
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+    <div
+      th:replace="~{fragments/breadcrumbs :: projectDetail(${project})}"
+    ></div>
+
+    <header class="page-header">
+      <span class="page-eyebrow">Project detail</span>
+      <h1 th:text="${project.name}">Project Name</h1>
+      <p th:text="${project.description}">Project description</p>
+    </header>
+
+    <section class="project-tabs">
+      <input type="radio" name="project-tab" id="tab-actors" checked />
+      <input type="radio" name="project-tab" id="tab-usecases" />
+      <input type="radio" name="project-tab" id="tab-crc" />
+      <input type="radio" name="project-tab" id="tab-diagrams" />
+
+      <div class="tab-buttons">
+        <label for="tab-actors">
+          Actors
+          <span
+            class="tab-count"
+            th:text="${project.actors != null ? #lists.size(project.actors) : 0}"
+            >0</span
+          >
+        </label>
+
+        <label for="tab-usecases">
+          Use Cases
+          <span
+            class="tab-count"
+            th:text="${useCases != null ? #lists.size(useCases) : 0}"
+            >0</span
+          >
+        </label>
+
+        <label for="tab-crc">
+          CRC Cards
+          <span
+            class="tab-count"
+            th:text="${project.CRCCards != null ? #lists.size(project.CRCCards) : 0}"
+            >0</span
+          >
+        </label>
+
+        <label for="tab-diagrams">Diagrams</label>
+      </div>
+
+      <div class="tab-panels">
+        <!-- Actors Tab -->
+        <section id="panel-actors" class="tab-panel card">
+          <h3>Actors</h3>
+
+          <form
+            class="inline-create-form"
+            th:action="@{/projects/{id}/actors/create(id=${project.id})}"
+            method="post"
+          >
+            <input type="text" name="name" placeholder="Actor name" required />
+            <button type="submit">Add Actor</button>
+          </form>
+
+          <ul
+            th:if="${project.actors != null and not #lists.isEmpty(project.actors)}"
+          >
+            <li th:each="actor : ${project.actors}">
+              <span th:text="${actor.name}"></span>
+
+              <form
+                th:action="@{/projects/{pid}/actors/{aid}/delete(pid=${project.id},aid=${actor.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+          </ul>
+
+          <div
+            class="mini-empty"
+            th:if="${project.actors == null or #lists.isEmpty(project.actors)}"
+          >
+            No actors added yet.
+          </div>
+        </section>
+
+        <!-- Use Cases Tab -->
+        <section id="panel-usecases" class="tab-panel card">
+          <h3>Use Cases</h3>
+
+          <form
+            class="tab-form-grid"
+            th:action="@{/projects/{id}/usecases/create(id=${project.id})}"
+            method="post"
+          >
+            <label class="full-row">
+              Use case name
+              <input
+                type="text"
+                name="name"
+                placeholder="Use case name"
+                required
+              />
+            </label>
+
+            <label>
+              Preconditions
+              <textarea
+                name="preconditions"
+                placeholder="Preconditions"
+              ></textarea>
+            </label>
+
+            <label>
+              Main flow
+              <textarea name="mainFlow" placeholder="Main flow"></textarea>
+            </label>
+
+            <label>
+              Alternative flow
+              <textarea
+                name="alternativeFlow"
+                placeholder="Alternative flow"
+              ></textarea>
+            </label>
+
+            <label>
+              Postconditions
+              <textarea
+                name="postconditions"
+                placeholder="Postconditions"
+              ></textarea>
+            </label>
+
+            <button type="submit" class="full-row">Add Use Case</button>
+          </form>
+
+          <ul th:if="${useCases != null and not #lists.isEmpty(useCases)}">
+            <li th:each="uc : ${useCases}">
+              <span th:text="${uc.name}"></span>
+
+              <a
+                th:href="@{/projects/{pid}/usecases/{uid}/edit(pid=${project.id},uid=${uc.id})}"
+                >Edit</a
+              >
+
+              <form
+                th:action="@{/projects/{pid}/usecases/{uid}/delete(pid=${project.id},uid=${uc.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+          </ul>
+
+          <div
+            class="mini-empty"
+            th:if="${useCases == null or #lists.isEmpty(useCases)}"
+          >
+            No use cases added yet.
+          </div>
+        </section>
+
+        <!-- CRC Cards Tab -->
+        <section id="panel-crc" class="tab-panel card">
+          <h3>CRC Cards</h3>
+
+          <form
+            class="tab-form-grid"
+            th:action="@{/projects/{id}/crccards/create(id=${project.id})}"
+            method="post"
+          >
+            <label class="full-row">
+              Class name
+              <input
+                type="text"
+                name="className"
+                placeholder="Class name"
+                required
+              />
+            </label>
+
+            <label>
+              Responsibilities
+              <textarea
+                name="responsibilities"
+                placeholder="Responsibilities"
+              ></textarea>
+            </label>
+
+            <label>
+              Collaborations
+              <textarea
+                name="collaborations"
+                placeholder="Collaborations, comma-separated"
+              ></textarea>
+            </label>
+
+            <button type="submit" class="full-row">Add CRC Card</button>
+          </form>
+
+          <ul
+            th:if="${project.CRCCards != null and not #lists.isEmpty(project.CRCCards)}"
+          >
+            <li th:each="card : ${project.CRCCards}">
+              <span th:text="${card.className}"></span>
+
+              <a
+                th:href="@{/projects/{pid}/crccards/{cid}/edit(pid=${project.id},cid=${card.id})}"
+                >Edit</a
+              >
+
+              <form
+                th:action="@{/projects/{pid}/crccards/{cid}/delete(pid=${project.id},cid=${card.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+          </ul>
+
+          <div
+            class="mini-empty"
+            th:if="${project.CRCCards == null or #lists.isEmpty(project.CRCCards)}"
+          >
+            No CRC cards added yet.
+          </div>
+        </section>
+
+        <!-- Diagrams Tab -->
+        <section id="panel-diagrams" class="tab-panel card">
+          <div class="diagram-panel-header">
+            <div>
+              <h3>Generate Diagrams</h3>
+              <p>
+                Create diagram scripts from your project data using
+                <span class="inline-tech">PlantUML</span>
+                or
+                <span class="inline-tech">Nomnoml</span>.
+              </p>
+            </div>
+          </div>
+
+          <div class="diagram-generator-grid">
+            <article class="diagram-generator-card">
+
+              <div class="diagram-generator-content">
+                <h4>Use Case Diagram</h4>
+                <p>
+                  Generate a use case diagram based on the project actors and
+                  use cases.
+                </p>
+
+                <div class="diagram-tool-actions">
+                  <a
+                    th:href="@{/projects/{id}/diagram/usecase(id=${project.id},tool='plantuml')}"
+                  >
+                    PlantUML
+                  </a>
+
+                  <a
+                    th:href="@{/projects/{id}/diagram/usecase(id=${project.id},tool='nomnoml')}"
+                  >
+                    Nomnoml
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="diagram-generator-card">
+
+              <div class="diagram-generator-content">
+                <h4>Class Diagram</h4>
+                <p>
+                  Generate a class diagram based on the project CRC cards and
+                  collaborations.
+                </p>
+
+                <div class="diagram-tool-actions">
+                  <a
+                    th:href="@{/projects/{id}/diagram/classdiagram(id=${project.id},tool='plantuml')}"
+                  >
+                    PlantUML
+                  </a>
+
+                  <a
+                    th:href="@{/projects/{id}/diagram/classdiagram(id=${project.id},tool='nomnoml')}"
+                  >
+                    Nomnoml
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <div th:replace="~{fragments/footer :: appFooter}"></div>
+  </body>
+</html>

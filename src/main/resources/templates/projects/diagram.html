@@ -1,0 +1,108 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CaseCraft</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      th:href="@{/images/casecraft-icon.svg}"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body class="wide">
+    <div th:replace="~{fragments/navbar :: appNavbar}"></div>
+    <div th:replace="~{fragments/toasts :: toasts}"></div>
+
+    <h2>Generated Script</h2>
+
+    <div class="card generated-script-card">
+      <div class="script-card-header">
+        <p>
+          Copy this script and paste it into
+          <span th:if="${tool == 'plantuml'}" class="inline-tech"
+            >PlantUML</span
+          >
+          <span th:if="${tool == 'nomnoml'}" class="inline-tech">Nomnoml</span>.
+        </p>
+
+        <a
+          th:if="${tool == 'plantuml'}"
+          href="https://www.plantuml.com/plantuml"
+          target="_blank"
+          class="script-open-link"
+        >
+          Open PlantUML
+        </a>
+
+        <a
+          th:if="${tool == 'nomnoml'}"
+          href="https://www.nomnoml.com"
+          target="_blank"
+          class="script-open-link"
+        >
+          Open Nomnoml
+        </a>
+      </div>
+
+      <div class="script-copy-box">
+        <button
+          type="button"
+          class="copy-script-button"
+          onclick="copyGeneratedScript(this)"
+          title="Copy script"
+          aria-label="Copy script"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+            <rect x="4" y="4" width="11" height="11" rx="2"></rect>
+          </svg>
+        </button>
+
+        <textarea
+          id="generatedScript"
+          rows="20"
+          cols="80"
+          readonly
+          th:text="${script}"
+        ></textarea>
+      </div>
+    </div>
+
+    <script>
+      function copyGeneratedScript(button) {
+        const textarea = document.getElementById("generatedScript");
+        const text = textarea.value;
+
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            showCopiedState(button);
+          });
+        } else {
+          textarea.select();
+          document.execCommand("copy");
+          showCopiedState(button);
+        }
+      }
+
+      function showCopiedState(button) {
+        button.classList.add("copied");
+        button.setAttribute("title", "Copied!");
+
+        setTimeout(() => {
+          button.classList.remove("copied");
+          button.setAttribute("title", "Copy script");
+        }, 1400);
+      }
+    </script>
+  </body>
+</html>
