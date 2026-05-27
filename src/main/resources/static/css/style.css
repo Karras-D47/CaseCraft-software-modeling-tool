@@ -1628,6 +1628,25 @@ td a:hover {
   text-align: center;
 }
 
+.diagram-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.2rem;
+
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent-deep);
+  font-weight: 800;
+  border-bottom: 0;
+}
+
+.diagram-back-link:hover {
+  color: var(--accent-hover);
+  border-bottom: 0;
+  transform: translateX(-2px);
+}
+
 /* ===========================================================
    Footer
    =========================================================== */

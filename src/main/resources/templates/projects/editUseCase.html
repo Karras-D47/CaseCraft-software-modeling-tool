@@ -32,6 +32,7 @@
         <label
           >Actors
           <select name="actorIds" multiple size="4">
+            <option value="" disabled>Select one or more actors…</option>
             <option
               th:each="a : ${actors}"
               th:value="${a.id}"

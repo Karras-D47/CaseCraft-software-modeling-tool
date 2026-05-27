@@ -15,9 +15,20 @@
     <div th:replace="~{fragments/navbar :: appNavbar}"></div>
     <div th:replace="~{fragments/toasts :: toasts}"></div>
 
-    <h2>Generated Script</h2>
+    <header class="page-header">
+      <span class="page-eyebrow">Generated script</span>
+    </header>
 
     <div class="card generated-script-card">
+      <a
+        class="diagram-back-link"
+        th:href="@{/projects/{id}(id=${projectId},tab='diagrams')}"
+        title="Back to Diagrams"
+        aria-label="Back to Diagrams"
+      >
+        &larr;
+      </a>
+
       <div class="script-card-header">
         <p>
           Copy this script and paste it into
@@ -76,7 +87,6 @@
           th:text="${script}"
         ></textarea>
       </div>
-    </div>
 
     <script>
       function copyGeneratedScript(button) {

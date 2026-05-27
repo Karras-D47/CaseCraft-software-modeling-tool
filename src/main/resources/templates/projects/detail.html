@@ -141,6 +141,9 @@
             <label class="full-row">
               Actors
               <select name="actorIds" multiple size="4">
+                <option value="" disabled>
+                  Select one or more actors (Ctrl/Cmd for multiple)
+                </option>
                 <option
                   th:each="a : ${actors}"
                   th:value="${a.id}"
