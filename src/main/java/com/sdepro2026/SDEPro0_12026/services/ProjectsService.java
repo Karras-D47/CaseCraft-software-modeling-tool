@@ -1,4 +1,5 @@
 package com.sdepro2026.SDEPro0_12026.services;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,4 +128,10 @@ public class ProjectsService{
                 .orElseThrow(() -> new RuntimeException("CRCCard not found: " + id));
     }
 
+    public List<Actor> findActorsByIds(List<Long> actorIds) {
+        if (actorIds == null || actorIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return actorRepository.findAllById(actorIds);
+    }
 }

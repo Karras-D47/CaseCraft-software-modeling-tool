@@ -138,6 +138,17 @@
               />
             </label>
 
+            <label class="full-row">
+              Actors
+              <select name="actorIds" multiple size="4">
+                <option
+                  th:each="a : ${actors}"
+                  th:value="${a.id}"
+                  th:text="${a.name}"
+                ></option>
+              </select>
+            </label>
+
             <label>
               Preconditions
               <textarea

@@ -108,6 +108,7 @@ public class ProjectsController {
         model.addAttribute("newUseCase", new UseCase());
         model.addAttribute("newCRCCard", new CRCCard());
         model.addAttribute("newActor", new Actor());
+        model.addAttribute("actors", project.getActors());
         model.addAttribute("activeTab", tab);
         return "projects/detail";
     }
@@ -119,6 +120,7 @@ public class ProjectsController {
                                 @RequestParam String mainFlow,
                                 @RequestParam String alternativeFlow,
                                 @RequestParam String postconditions,
+                                @RequestParam(required = false) List<Long> actorIds,
                                 RedirectAttributes redirectAttributes) {
         Project project = projectsService.findProjectByID(projectId);
         UseCase useCase = new UseCase();
@@ -128,6 +130,7 @@ public class ProjectsController {
         useCase.setAlternativeFlow(alternativeFlow);
         useCase.setPostconditions(postconditions);
         useCase.setProject(project);
+        useCase.setActors(projectsService.findActorsByIds(actorIds));
         projectsService.saveUseCase(useCase);
         redirectAttributes.addFlashAttribute("success", "Use case created.");
         return "redirect:/projects/" + projectId + "?tab=usecases";
@@ -141,6 +144,7 @@ public class ProjectsController {
         UseCase useCase = projectsService.findUseCaseById(useCaseId);
         model.addAttribute("project", project);
         model.addAttribute("useCase", useCase);
+        model.addAttribute("actors", project.getActors());
         return "projects/editUseCase";
     }
 
@@ -152,6 +156,7 @@ public class ProjectsController {
                                 @RequestParam String mainFlow,
                                 @RequestParam String alternativeFlow,
                                 @RequestParam String postconditions,
+                                @RequestParam(required = false) List<Long> actorIds,
                                 RedirectAttributes redirectAttributes) {
         UseCase useCase = projectsService.findUseCaseById(useCaseId);
         useCase.setName(name);
@@ -159,9 +164,10 @@ public class ProjectsController {
         useCase.setMainFlow(mainFlow);
         useCase.setAlternativeFlow(alternativeFlow);
         useCase.setPostconditions(postconditions);
+        useCase.setActors(projectsService.findActorsByIds(actorIds)); 
         projectsService.saveUseCase(useCase);
         redirectAttributes.addFlashAttribute("success", "Use case updated.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=usecases";
     }
 
     @PostMapping("/{projectId}/usecases/{useCaseId}/delete")
