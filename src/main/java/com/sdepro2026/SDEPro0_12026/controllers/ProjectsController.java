@@ -122,6 +122,12 @@ public class ProjectsController {
                                 @RequestParam String postconditions,
                                 @RequestParam(required = false) List<Long> actorIds,
                                 RedirectAttributes redirectAttributes) {
+
+        if (actorIds == null || actorIds.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Please select at least one actor for the use case.");
+            return "redirect:/projects/" + projectId + "?tab=usecases";
+        }
+
         Project project = projectsService.findProjectByID(projectId);
         UseCase useCase = new UseCase();
         useCase.setName(name);
@@ -158,13 +164,19 @@ public class ProjectsController {
                                 @RequestParam String postconditions,
                                 @RequestParam(required = false) List<Long> actorIds,
                                 RedirectAttributes redirectAttributes) {
+
+        if (actorIds == null || actorIds.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Please select at least one actor.");
+            return "redirect:/projects/" + projectId + "/usecases/" + useCaseId + "/edit";
+        }
+
         UseCase useCase = projectsService.findUseCaseById(useCaseId);
         useCase.setName(name);
         useCase.setPreconditions(preconditions);
         useCase.setMainFlow(mainFlow);
         useCase.setAlternativeFlow(alternativeFlow);
         useCase.setPostconditions(postconditions);
-        useCase.setActors(projectsService.findActorsByIds(actorIds)); 
+        useCase.setActors(projectsService.findActorsByIds(actorIds));
         projectsService.saveUseCase(useCase);
         redirectAttributes.addFlashAttribute("success", "Use case updated.");
         return "redirect:/projects/" + projectId + "?tab=usecases";

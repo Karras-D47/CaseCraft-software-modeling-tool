@@ -31,7 +31,7 @@
 
         <label
           >Actors
-          <select name="actorIds" multiple size="4">
+          <select name="actorIds" multiple size="4" required>
             <option value="" disabled>Select one or more actors…</option>
             <option
               th:each="a : ${actors}"
