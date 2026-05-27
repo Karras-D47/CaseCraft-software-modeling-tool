@@ -25,10 +25,30 @@
     </header>
 
     <section class="project-tabs">
-      <input type="radio" name="project-tab" id="tab-actors" checked />
-      <input type="radio" name="project-tab" id="tab-usecases" />
-      <input type="radio" name="project-tab" id="tab-crc" />
-      <input type="radio" name="project-tab" id="tab-diagrams" />
+      <input
+        type="radio"
+        name="project-tab"
+        id="tab-actors"
+        th:checked="${activeTab == null or activeTab == 'actors'}"
+      />
+      <input
+        type="radio"
+        name="project-tab"
+        id="tab-usecases"
+        th:checked="${activeTab == 'usecases'}"
+      />
+      <input
+        type="radio"
+        name="project-tab"
+        id="tab-crc"
+        th:checked="${activeTab == 'crc'}"
+      />
+      <input
+        type="radio"
+        name="project-tab"
+        id="tab-diagrams"
+        th:checked="${activeTab == 'diagrams'}"
+      />
 
       <div class="tab-buttons">
         <label for="tab-actors">
@@ -260,7 +280,6 @@
 
           <div class="diagram-generator-grid">
             <article class="diagram-generator-card">
-
               <div class="diagram-generator-content">
                 <h4>Use Case Diagram</h4>
                 <p>
@@ -285,7 +304,6 @@
             </article>
 
             <article class="diagram-generator-card">
-
               <div class="diagram-generator-content">
                 <h4>Class Diagram</h4>
                 <p>

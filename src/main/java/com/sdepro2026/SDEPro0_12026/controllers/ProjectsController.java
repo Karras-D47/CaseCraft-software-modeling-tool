@@ -99,13 +99,16 @@ public class ProjectsController {
     }
 
     @GetMapping("/{projectId}")
-    public String showProject(@PathVariable Long projectId, Model model) {
+    public String showProject(@PathVariable Long projectId,
+                            @RequestParam(required = false) String tab,
+                            Model model) {
         Project project = projectsService.findProjectByID(projectId);
         model.addAttribute("project", project);
         model.addAttribute("useCases", projectsService.getUseCasesForProject(project));
         model.addAttribute("newUseCase", new UseCase());
         model.addAttribute("newCRCCard", new CRCCard());
         model.addAttribute("newActor", new Actor());
+        model.addAttribute("activeTab", tab);
         return "projects/detail";
     }
 
@@ -127,7 +130,7 @@ public class ProjectsController {
         useCase.setProject(project);
         projectsService.saveUseCase(useCase);
         redirectAttributes.addFlashAttribute("success", "Use case created.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=usecases";
     }
 
     @GetMapping("/{projectId}/usecases/{useCaseId}/edit")
@@ -167,7 +170,7 @@ public class ProjectsController {
                                 RedirectAttributes redirectAttributes) {
         projectsService.deleteUseCase(useCaseId);
         redirectAttributes.addFlashAttribute("success", "Use case deleted.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=usecases";
     }
 
     @PostMapping("/{projectId}/crccards/create")
@@ -184,7 +187,7 @@ public class ProjectsController {
         card.setProject(project);
         projectsService.saveCRCCard(card);
         redirectAttributes.addFlashAttribute("success", "CRC card created.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=crc";
     }
 
     @GetMapping("/{projectId}/crccards/{cardId}/edit")
@@ -213,7 +216,7 @@ public class ProjectsController {
         card.setCollaborations(collaborations);
         projectsService.saveCRCCard(card);
         redirectAttributes.addFlashAttribute("success", "CRC card updated.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=crc";
     }
 
     @PostMapping("/{projectId}/crccards/{cardId}/link")
@@ -232,7 +235,7 @@ public class ProjectsController {
                                 RedirectAttributes redirectAttributes) {
         projectsService.deleteCRCCard(cardId);
         redirectAttributes.addFlashAttribute("success", "CRC card deleted.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=crc";
     }
 
     @PostMapping("/{projectId}/actors/create")
@@ -245,7 +248,7 @@ public class ProjectsController {
         actor.setProject(project);
         projectsService.saveActor(actor);
         redirectAttributes.addFlashAttribute("success", "Actor created.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=actors";
     }
 
     @PostMapping("/{projectId}/actors/{actorId}/delete")
@@ -254,7 +257,7 @@ public class ProjectsController {
                               RedirectAttributes redirectAttributes) {
         projectsService.deleteActor(actorId);
         redirectAttributes.addFlashAttribute("success", "Actor deleted.");
-        return "redirect:/projects/" + projectId;
+        return "redirect:/projects/" + projectId + "?tab=actors";
     }
 
     @GetMapping("/{projectId}/diagram/usecase")
