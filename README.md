@@ -2,9 +2,11 @@
   <img src="assets/casecraft-logo.png" width="520" alt="CaseCraft">
 </p>
 
-> A web-based software-modeling workspace for organizing requirements and design artifacts — actors, use cases, and CRC cards — and turning them into ready-to-render **PlantUML** and **Nomnoml** diagram scripts.
+<p align="center">
+  <em>A web-based software-modeling workspace for organizing requirements and design artifacts — actors, use cases, and CRC cards — and turning them into ready-to-render <strong>PlantUML</strong> and <strong>Nomnoml</strong> diagram scripts.</em>
+</p>
 
-<p>
+<p align="center">
   <img alt="Java" src="https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white">
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-4.0.3-6DB33F?logo=springboot&logoColor=white">
   <img alt="MySQL" src="https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white">
