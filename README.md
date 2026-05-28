@@ -1,4 +1,6 @@
-# CaseCraft
+<p align="center">
+  <img src="docs/casecraft-logo.png" width="520" alt="CaseCraft">
+</p>
 
 > A web-based software-modeling workspace for organizing requirements and design artifacts — actors, use cases, and CRC cards — and turning them into ready-to-render **PlantUML** and **Nomnoml** diagram scripts.
 
@@ -7,7 +9,7 @@
   <img alt="Spring Boot" src="https://img.shields.io/badge/Spring%20Boot-4.0.3-6DB33F?logo=springboot&logoColor=white">
   <img alt="MySQL" src="https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white">
   <img alt="Build" src="https://img.shields.io/badge/build-Maven-C71A36?logo=apachemaven&logoColor=white">
-  <img alt="License" src="https://img.shields.io/badge/license-Educational-lightgrey">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-8A3940"></a>
 </p>
 
 CaseCraft replaces scattered design documents with a single authenticated workspace. Each project groups its actors, use cases, and CRC cards together, and the application generates diagram scripts directly from that data — so the model and its diagrams never drift out of sync.
