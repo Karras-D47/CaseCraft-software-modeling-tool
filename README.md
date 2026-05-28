@@ -24,6 +24,7 @@ CaseCraft replaces scattered design documents with a single authenticated worksp
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
 - [Diagram Generation](#diagram-generation)
+- [Screenshots](#screenshots)
 - [Project Structure](#project-structure)
 - [Testing](#testing)
 - [Roadmap](#roadmap)
@@ -74,6 +75,19 @@ Diagram output is decoupled from the controller and service layers so new format
 - **Strategy** — each tool/diagram combination (PlantUML use case, Nomnoml use case, PlantUML class, Nomnoml class) is an interchangeable generator.
 - **Template Method** — abstract generators define the shared generation skeleton; subclasses supply the tool-specific syntax.
 - **Factory** — selects the correct generator for the requested tool at runtime.
+
+## Screenshots
+
+![Dashboard](docs/screenshots/CaseCraft-login.png)
+
+<details>
+<summary>📸 Show images </summary>
+
+![Project detail](docs/screenshots/CaseCraft-dashboard.png)
+![Diagram generation](docs/screenshots/diagram-PlantUML.png)
+![Add use case](docs/screenshots/diagram-nomnoml.png)
+
+</details>
 
 ---
 
