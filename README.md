@@ -229,7 +229,7 @@ The suite covers domain behavior, repository interaction, service logic, control
 
 ## Authors
 
-Developed by **k3rneluser** & **VoiD** as part of a software engineering course (MYY803 — Software Development)
+Developed by **[k3rneluser](https://github.com/k3rneluser)** & **[VoiD](https://github.com/<Karras-D47>)** as part of a software engineering course (MYY803 — Software Development)
 
 ## License
 
