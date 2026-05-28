@@ -78,14 +78,14 @@ Diagram output is decoupled from the controller and service layers so new format
 
 ## Screenshots
 
-![Dashboard](docs/screenshots/CaseCraft-login.png)
+![Dashboard](assets/screenshots/CaseCraft-login.png)
 
 <details>
 <summary>📸 Show images </summary>
 
-![Project detail](docs/screenshots/CaseCraft-dashboard.png)
-![Diagram generation](docs/screenshots/diagram-PlantUML.png)
-![Add use case](docs/screenshots/diagram-nomnoml.png)
+![Project detail](assets/screenshots/CaseCraft-dashboard.png)
+![Diagram generation](assets/screenshots/diagram-PlantUML.png)
+![Add use case](assets/screenshots/diagram-nomnoml.png)
 
 </details>
 
