@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/casecraft-logo.png" width="520" alt="CaseCraft">
+  <img src="assets/casecraft-logo.png" width="520" alt="CaseCraft">
 </p>
 
 > A web-based software-modeling workspace for organizing requirements and design artifacts — actors, use cases, and CRC cards — and turning them into ready-to-render **PlantUML** and **Nomnoml** diagram scripts.
